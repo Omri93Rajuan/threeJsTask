@@ -1,6 +1,6 @@
-import * as THREE from "three";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import GUI from 'dat.gui';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import * as dat from 'dat.gui';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -9,35 +9,34 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Lighting
-const ambientLight = new THREE.AmbientLight(0x404040);
+const ambientLight = new THREE.AmbientLight(0x404040, 2);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+directionalLight.position.set(0, 1, 1);
 scene.add(directionalLight);
 
 // Camera position
-camera.position.z = 5;
+camera.position.z = 10;
 
 // GLTF Loader
-const gltfLoader = new GLTFLoader();
+const loader = new GLTFLoader();
 let model;
-gltfLoader.load('path/to/your/model.gltf', (gltf) => {
-    model = gltf.scene;
-    scene.add(model);
-    initializeGUI();
-}, undefined, (error) => {
-    console.error('An error happened during the loading process:', error);
-});
 
-// GUI setup
-const gui = new GUI();
-function initializeGUI() {
-    const modelFolder = gui.addFolder('Model Controls');
-    modelFolder.add(model.rotation, 'x', 0, Math.PI * 2);
-    modelFolder.add(model.rotation, 'y', 0, Math.PI * 2);
-    modelFolder.add(model.rotation, 'z', 0, Math.PI * 2);
-    modelFolder.open();
-}
+loader.load(
+    'digimon_greymon.glb',  // הכנס את הנתיב לקובץ GLTF שלך
+    function (gltf) {
+        model = gltf.scene;
+        model.position.set(0, 0, 0);
+        scene.add(model);
+    },
+    function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+        console.error('An error happened', error);
+    }
+);
 
 function animate() {
     requestAnimationFrame(animate);

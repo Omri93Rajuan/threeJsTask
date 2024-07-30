@@ -5,5 +5,8 @@
   },
   "devDependencies": {
     "vite": "^5.3.5"
+  },
+  "stackblitz": {
+    "startCommand": "npx vite"
   }
 }

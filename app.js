@@ -19,18 +19,20 @@ scene.add(directionalLight);
 // Camera position
 camera.position.z = 10;
 
-// GLTF Loader
 const loader = new GLTFLoader();
+
 let model;
 
 loader.load(
-    'earth.glb',  // הכנס את הנתיב לקובץ GLTF שלך
-     (gltf) => {
+    'digimon.glb',(gltf) => {
         model = gltf.scene;
         model.position.set(0, 0, 0);
         scene.add(model);
     }
 );
+
+
+
 
 function animate() {
   

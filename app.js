@@ -24,7 +24,7 @@ const loader = new GLTFLoader();
 let model;
 
 loader.load(
-    'digimon.glb',(gltf) => {
+    'earth.glb',(gltf) => {
         model = gltf.scene;
         model.position.set(0, 0, 0);
         scene.add(model);

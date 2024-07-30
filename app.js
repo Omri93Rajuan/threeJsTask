@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -24,10 +24,10 @@ const loader = new GLTFLoader();
 let model;
 
 loader.load(
-    'digimon.glb',  // הכנס את הנתיב לקובץ GLTF שלך
+    'earth.glb',  // הכנס את הנתיב לקובץ GLTF שלך
      (gltf) => {
         model = gltf.scene;
-        model.position.set(0, 2, 0);
+        model.position.set(0, 0, 0);
         scene.add(model);
     }
 );
@@ -35,11 +35,10 @@ loader.load(
 function animate() {
   
     requestAnimationFrame(animate);
-    
-    if (model) {
-      model.rotation.y +=  0.2;  // סינוס של הזמן יאפשר תנועה "נושמת"
-  }
-
+if(model)
+{
+model.rotation.y += 0.01
+}
         renderer.render(scene, camera);
 }
 

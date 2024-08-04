@@ -9,7 +9,6 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Lighting
 const ambientLight = new THREE.AmbientLight(0x404040, 2);
 scene.add(ambientLight);
 
@@ -17,10 +16,8 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 6);
 directionalLight.position.set(0, 1, 1);
 scene.add(directionalLight);
 
-// Camera position
 camera.position.set(0, 10, 20);
 
-// OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 0, 0);
 controls.update();
@@ -38,7 +35,6 @@ loader.load(
 function animate() {
     requestAnimationFrame(animate);
 
-    // Required if controls.enableDamping or controls.autoRotate are set to true
     controls.update();
 
     renderer.render(scene, camera);
@@ -46,7 +42,6 @@ function animate() {
 
 animate();
 
-// Responsive window
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();

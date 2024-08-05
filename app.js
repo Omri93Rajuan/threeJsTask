@@ -19,8 +19,6 @@ scene.add(directionalLight);
 camera.position.set(0, 10, 20);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 0, 0);
-controls.update();
 
 const loader = new GLTFLoader();
 let model;
